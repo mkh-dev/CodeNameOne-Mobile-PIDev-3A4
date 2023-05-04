@@ -118,8 +118,8 @@ public class AjoutReclamationForm extends BaseForm {
                InfiniteProgress ip = new InfiniteProgress();
         final Dialog ipDlg = ip.showInifiniteBlocking();
         
-        //  ListReclamationForm a = new ListReclamationForm(res);
-          //  a.show();
+        ListReclamationForm a = new ListReclamationForm(res);
+            a.show();
             refreshTheme();
         });
 
@@ -146,13 +146,25 @@ public class AjoutReclamationForm extends BaseForm {
         //
         
       
-        TextField objet = new TextField("", "entrer Objet!!");
-        objet.setUIID("TextFieldBlack");
-        addStringValue("Objet",objet);
+
+        TextField prenom = new TextField("", "entrer Prenom!!");
+        prenom.setUIID("TextFieldBlack");
+        addStringValue("Prenom",prenom);
         
-        TextField description = new TextField("", "entrer description!!");
-        description.setUIID("TextFieldBlack");
-        addStringValue("Description",description);
+        
+                TextField nom = new TextField("", "entrer Nom!!");
+        nom.setUIID("TextFieldBlack");
+        addStringValue("Nom",nom);
+        
+        
+        
+          TextField email = new TextField("", "entrer Email!!");
+        email.setUIID("TextFieldBlack");
+        addStringValue("Email",email);
+        
+        TextField message = new TextField("", "entrer message!!");
+        message.setUIID("TextFieldBlack");
+        addStringValue("Message",message);
         
         
         Button btnAjouter = new Button("Ajouter");
@@ -166,7 +178,7 @@ public class AjoutReclamationForm extends BaseForm {
             
             try {
                 
-                if(objet.getText().equals("") || description.getText().equals("")) {
+                if(nom.getText().equals("") || prenom.getText().equals("") || email.getText().equals("") || message.getText().equals("")) {
                     Dialog.show("Veuillez vérifier les données","","Annuler", "OK");
                 }
                 
@@ -178,11 +190,11 @@ public class AjoutReclamationForm extends BaseForm {
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     
                     //njibo iduser men session (current user)
-                    Reclamation r = new Reclamation(String.valueOf(objet.getText()
-                                  ).toString(),
-                                  String.valueOf(description.getText()).toString(),
-                                  format.format(new Date()),
-                                  0,SessionManager.getId());
+                 Reclamation r = new Reclamation(String.valueOf(prenom.getText()).toString(),
+                                 nom.getText().toString(),
+                                 email.getText().toString(),
+                                 String.valueOf(message.getText()).toString());
+
                     
                     System.out.println("data  reclamation == "+r);
                     

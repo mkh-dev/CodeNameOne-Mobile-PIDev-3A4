@@ -38,35 +38,24 @@ public class ModifierReclamationForm extends BaseForm {
         
         super.addSideMenu(res);
         
-        TextField objet = new TextField(r.getObjet() , "Objet" , 20 , TextField.ANY);
-        TextField description = new TextField(r.getObjet() , "Description" , 20 , TextField.ANY);
-               TextField etat = new TextField(String.valueOf(r.getEtat()) , "Etat" , 20 , TextField.ANY);
+        TextField prenom = new TextField(r.getPrenom() , "Prenom" , 20 , TextField.ANY);
+        TextField nom = new TextField(r.getNom() , "Nom" , 20 , TextField.ANY);
+        TextField email = new TextField(r.getEmail() , "Email" , 20 , TextField.ANY);
+        TextField message = new TextField(String.valueOf(r.getMessage()) , "Message" , 20 , TextField.ANY);
  
-        //etat bch na3mlo comobbox bon lazm admin ya3mlleha approuver mais just chnwarikom ComboBox
-        
-        ComboBox etatCombo = new ComboBox();
-        
-        etatCombo.addItem("Non Traiter");
-        
-        etatCombo.addItem("Traiter");
-        
-        if(r.getEtat() == 0 ) {
-            etatCombo.setSelectedIndex(0);
-        }
-        else 
-            etatCombo.setSelectedIndex(1);
         
         
         
+         
+        prenom.setUIID("NewsTopLine");
+        nom.setUIID("NewsTopLine");
+        email.setUIID("NewsTopLine");
+        message.setUIID("NewsTopLine");
         
-        
-        objet.setUIID("NewsTopLine");
-        description.setUIID("NewsTopLine");
-        etat.setUIID("NewsTopLine");
-        
-        objet.setSingleLineTextArea(true);
-        description.setSingleLineTextArea(true);
-        etat.setSingleLineTextArea(true);
+        prenom.setSingleLineTextArea(true);
+        nom.setSingleLineTextArea(true);
+        email.setSingleLineTextArea(true);
+        message.setSingleLineTextArea(true);
         
         Button btnModifier = new Button("Modifier");
        btnModifier.setUIID("Button");
@@ -75,15 +64,12 @@ public class ModifierReclamationForm extends BaseForm {
        
        btnModifier.addPointerPressedListener(l ->   { 
            
-           r.setObjet(objet.getText());
-           r.setDescription(description.getText());
+           r.setPrenom(prenom.getText());
+            r.setNom(nom.getText());
+             r.setEmail(email.getText());
+           r.setMessage(message.getText());
            
-           if(etatCombo.getSelectedIndex() == 0 ) {
-               r.setEtat(0);
-           }
-           else 
-               r.setEtat(1);
-      
+     
        
        //appel fonction modfier reclamation men service
        
@@ -109,11 +95,13 @@ public class ModifierReclamationForm extends BaseForm {
         
         Container content = BoxLayout.encloseY(
                 l1, l2, 
-                new FloatingHint(objet),
+                new FloatingHint(prenom),
                 createLineSeparator(),
-                new FloatingHint(description),
+                new FloatingHint(nom),
                 createLineSeparator(),
-                etatCombo,
+                new FloatingHint(email),
+                createLineSeparator(),
+                new FloatingHint(email),
                 createLineSeparator(),//ligne de séparation
                 btnModifier,
                 btnAnnuler

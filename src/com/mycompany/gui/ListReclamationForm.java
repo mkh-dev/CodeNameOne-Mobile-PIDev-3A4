@@ -257,18 +257,13 @@ public class ListReclamationForm extends BaseForm{
         
         
         //kif nzidouh  ly3endo date mathbih fi codenamone y3adih string w y5alih f symfony dateTime w ytab3ni cha3mlt taw yjih
-        Label objetTxt = new Label("Date : "+rec.getDate(),"NewsTopLine2");
-        Label dateTxt = new Label("objet : "+rec.getObjet(),"NewsTopLine2");
-        Label etatTxt = new Label("etat : "+rec.getEtat(),"NewsTopLine2" );
+        Label prenomTxt = new Label("Prenom : "+rec.getPrenom(),"NewsTopLine2");
+        Label nomTxt = new Label("Nom : "+rec.getNom(),"NewsTopLine2");
+        Label emailTxt = new Label("Email : "+rec.getEmail(),"NewsTopLine2" );
+        Label messageTxt = new Label("Message : "+rec.getMessage(),"NewsTopLine2" );
         
         createLineSeparator();
         
-        if(rec.getEtat() == 0 ) {
-            etatTxt.setText("non Traitée");
-        }
-        else 
-            etatTxt.setText("Traitée");
-       
         
         //supprimer button
         Label lSupprimer = new Label(" ");
@@ -317,9 +312,10 @@ public class ListReclamationForm extends BaseForm{
         
         cnt.add(BorderLayout.CENTER,BoxLayout.encloseY(
                 
-                BoxLayout.encloseX(objetTxt),
-                BoxLayout.encloseX(dateTxt),
-                BoxLayout.encloseX(etatTxt,lModifier,lSupprimer)));
+                BoxLayout.encloseX(prenomTxt),
+                BoxLayout.encloseX(nomTxt),
+                BoxLayout.encloseX(emailTxt),
+                BoxLayout.encloseX(messageTxt)));
         
         
         

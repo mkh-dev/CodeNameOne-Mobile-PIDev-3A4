@@ -14,21 +14,26 @@ public class Reclamation {
     private int id;
     private String prenom;
     private String nom;
+    private String email;
     private String message;
+
+    public Reclamation(int id, String prenom, String nom, String email, String message) {
+        this.id = id;
+        this.prenom = prenom;
+        this.nom = nom;
+        this.email = email;
+        this.message = message;
+    }
 
     public Reclamation() {
     }
 
-    public Reclamation(int id, String prenom, String nom, String message) {
-        this.id = id;
+    
+    
+    public Reclamation(String prenom, String nom, String email, String message) {
         this.prenom = prenom;
         this.nom = nom;
-        this.message = message;
-    }
-
-    public Reclamation(String prenom, String nom, String message) {
-        this.prenom = prenom;
-        this.nom = nom;
+        this.email = email;
         this.message = message;
     }
 
@@ -56,6 +61,14 @@ public class Reclamation {
         this.nom = nom;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getMessage() {
         return message;
     }
@@ -63,6 +76,6 @@ public class Reclamation {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+
     
 }
