@@ -14,7 +14,6 @@ import java.io.IOException;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.io.NetworkEvent;
 import com.mycompany.gui.AjoutReclamationForm;
-import com.mycompany.gui.MapForm;
 import com.mycompany.gui.SignInForm;
 import com.mycompany.gui.SignUpForm;
 import com.mycompany.gui.StatistiquePieForm;
