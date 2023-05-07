@@ -72,13 +72,17 @@ public class ListReclamationForm extends BaseForm{
         
         System.out.println("user connecté id ="+ SessionManager.getId());
         
+        System.out.println("user connecté nom ="+ SessionManager.getNom());
         
+        System.out.println("user connecté prenom ="+ SessionManager.getPrenom());
         
-        System.out.println("user connecté username ="+ SessionManager.getUserName());
+        System.out.println("user connecté date de naissance ="+ SessionManager.getDatenaissance());
         
-        System.out.println("user connecté password ="+ SessionManager.getPassowrd());
+        System.out.println("user connecté numéro de téléphone ="+ SessionManager.getNumtel());
         
-        System.out.println("user connecté email ="+ SessionManager.getEmail());
+        System.out.println("user connecté role ="+ SessionManager.getUserrole());
+        
+        System.out.println("user connecté mot de passe ="+ SessionManager.getPassword());
         
         
         

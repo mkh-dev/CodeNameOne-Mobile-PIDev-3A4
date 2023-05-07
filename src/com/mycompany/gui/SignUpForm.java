@@ -32,9 +32,13 @@ import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.spinner.Picker;
 import com.codename1.ui.util.Resources;
 import com.mycompany.services.ServiceUtilisateur;
 import java.util.Vector;
+import javafx.scene.control.DatePicker;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Signup UI
@@ -56,30 +60,24 @@ public class SignUpForm extends BaseForm {
         TextField prenom = new TextField("", "Prenom", 20, TextField.ANY);
         TextField nom = new TextField("", "Nom", 20, TextField.ANY);
         TextField email = new TextField("", "E-Mail", 20, TextField.EMAILADDR);
-        TextField dateNaissance = new TextField("", "Date de Naissance", 20, TextField.PASSWORD);
-        TextField numTel = new TextField("", "Numéro de téléphone", 20, TextField.PASSWORD);
+        Picker datenaissance = new Picker();
+        datenaissance.setType(Display.PICKER_TYPE_DATE);
+        TextField numtel = new TextField("", "Numéro de téléphone", 20, TextField.NUMERIC);
         TextField password = new TextField("", "Password", 20, TextField.PASSWORD);
         
-           //Role 
-        //Vector 3ibara ala array 7atit fiha roles ta3na ba3d nzidouhom lel comboBox
-        Vector<String> vectorRole;
-        vectorRole = new Vector();
-        
+        // Role 
+        // Vector 3ibara ala array 7atit fiha roles ta3na ba3d nzidouhom lel comboBox
+        Vector<String> vectorRole = new Vector<>();
         vectorRole.add("Utilisateur");
         vectorRole.add("Organisateur");
         vectorRole.add("Transporteur");
         vectorRole.add("Partenaire");
-        
-        ComboBox<String>userRole = new ComboBox<>(vectorRole);
-        
-        
-        
+        ComboBox<String> userrole = new ComboBox<>(vectorRole);
         
         nom.setSingleLineTextArea(false);
         prenom.setSingleLineTextArea(false);
         email.setSingleLineTextArea(false);
-        dateNaissance.setSingleLineTextArea(false);
-        numTel.setSingleLineTextArea(false);
+        numtel.setSingleLineTextArea(false);
         password.setSingleLineTextArea(false);
 
         Button next = new Button("SignUp");
@@ -96,13 +94,15 @@ public class SignUpForm extends BaseForm {
                 createLineSeparator(),
                 new FloatingHint(email),
                 createLineSeparator(),
-                new FloatingHint(dateNaissance),
+                new Label("Date de naissance"),
                 createLineSeparator(),
-                new FloatingHint(numTel),
+                datenaissance,
+                createLineSeparator(),
+                new FloatingHint(numtel),
                 createLineSeparator(),
                 new FloatingHint(password),
                 createLineSeparator(),
-                userRole//sinon y7otich role fi form ta3 signup
+                userrole
         );
         content.setScrollableY(true);
         add(BorderLayout.CENTER, content);
@@ -113,7 +113,7 @@ public class SignUpForm extends BaseForm {
         next.requestFocus();
         next.addActionListener((e) -> {
             
-            ServiceUtilisateur.getInstance().signup(prenom, nom, email, dateNaissance, numTel, userRole, password, res);
+            ServiceUtilisateur.getInstance().signup(prenom, nom, email, datenaissance, numtel, userrole, password, res);
             Dialog.show("Success","account is saved","OK",null);
             new SignInForm(res).show();
         });

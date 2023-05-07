@@ -6,6 +6,7 @@
 package com.mycompany.gui;
 
 import com.codename1.io.Preferences;
+import java.util.Date;
 
 /**
  *
@@ -19,10 +20,13 @@ public class SessionManager {
     
     // hethom données ta3 user lyt7b tsajlhom fi session  ba3d login 
     private static int id ; 
-    private static String userName ; 
-    private static String email; 
-    private static String passowrd ;
-    private static String photo;
+    private static String prenom ; 
+private static String nom ; 
+private static String email ; 
+private static Date datenaissance ; 
+private static int numtel ; 
+private static String userrole ; 
+private static String password ; 
 
     public static Preferences getPref() {
         return pref;
@@ -33,46 +37,69 @@ public class SessionManager {
     }
 
     public static int getId() {
-        return pref.get("id",id);// kif nheb njib id user connecté apres njibha men pref 
+        return id;
     }
 
     public static void setId(int id) {
-        pref.set("id",id);//nsajl id user connecté  w na3tiha identifiant "id";
+        SessionManager.id = id;
     }
 
-    public static String getUserName() {
-        return pref.get("username",userName);
+    public static String getPrenom() {
+        return prenom;
     }
 
-    public static void setUserName(String userName) {
-         pref.set("username",userName);
+    public static void setPrenom(String prenom) {
+        SessionManager.prenom = prenom;
+    }
+
+    public static String getNom() {
+        return nom;
+    }
+
+    public static void setNom(String nom) {
+        SessionManager.nom = nom;
     }
 
     public static String getEmail() {
-        return pref.get("email",email);
+        return email;
     }
 
     public static void setEmail(String email) {
-         pref.set("email",email);
+        SessionManager.email = email;
     }
 
-    public static String getPassowrd() {
-        return pref.get("passowrd",passowrd);
+    public static Date getDatenaissance() {
+        return datenaissance;
     }
 
-    public static void setPassowrd(String passowrd) {
-         pref.set("passowrd",passowrd);
+    public static void setDatenaissance(Date datenaissance) {
+        SessionManager.datenaissance = datenaissance;
     }
 
-    public static String getPhoto() {
-        return pref.get("photo",photo);
+    public static int getNumtel() {
+        return numtel;
     }
 
-    public static void setPhoto(String photo) {
-         pref.set("photo",photo);
+    public static void setNumtel(int numtel) {
+        SessionManager.numtel = numtel;
     }
-    
-    
+
+    public static String getUserrole() {
+        return userrole;
+    }
+
+    public static void setUserrole(String userrole) {
+        SessionManager.userrole = userrole;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static void setPassword(String password) {
+        SessionManager.password = password;
+    }
+
     
     
     

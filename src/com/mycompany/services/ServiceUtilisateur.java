@@ -11,6 +11,7 @@ import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.ComboBox;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.spinner.Picker;
 import com.codename1.ui.TextField;
 import com.codename1.ui.util.Resources;
 import com.mycompany.utilis.Statics;
@@ -20,6 +21,8 @@ import com.mycompany.gui.SessionManager;
 import java.util.Map;
 import java.util.Vector;
 import javafx.scene.control.DatePicker;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -52,40 +55,44 @@ public class ServiceUtilisateur {
     }
     
     //Signup
-    public void signup(TextField prenom, TextField nom, TextField email, TextField dateNaissance, TextField numTel, ComboBox<String> userRole, TextField password, Resources res) {
+public void signup(TextField prenom, TextField nom, TextField email, Picker datenaissance, TextField numtel, ComboBox<String> userrole, TextField password, Resources res) {
+    // Format de la date de naissance
+    String dateNaissanceStr = datenaissance.getText();
+    
+    String url = Statics.BASE_URL+"/users/signup?prenom="+prenom.getText().toString()
+                                            +"&nom="+nom.getText().toString()
+                                            +"&email="+email.getText().toString()
+                                            +"&datenaissance="+dateNaissanceStr
+                                            +"&numtel="+numtel.getText()
+                                            +"&userrole="+userrole.getSelectedItem().toString()
+                                            +"&password="+password.getText().toString();
+                                            
+    req.setUrl(url);
+    
+    //Control saisi
+    if(prenom.getText().equals("") || nom.getText().equals("") || email.getText().equals("") || datenaissance.getText().equals("") || numtel.getText().equals("") || userrole.getSelectedItem() == null || password.getText().equals("")) {
+        Dialog.show("Erreur","Veuillez remplir les champs","OK",null);
+        return;
+    }
 
-        
+    //hethi wa9t tsir execution ta3 url 
+    req.addResponseListener((e)-> {
      
-        String url = Statics.BASE_URL+"user/signup?prenom="+prenom.getText().toString()+"&nom="+nom.getText().toString()+"&email="+email.getText().toString()+"&dateNaissance="+dateNaissance.getText().toString()+"&numTel="+numTel.getText().toString()+
-                "&userRole="+userRole.getSelectedItem().toString()+"&password="+password.getText().toString();
-
+        //njib data ly7atithom fi form 
+        byte[]data = (byte[]) e.getMetaData();//lazm awl 7aja n7athrhom ke meta data ya3ni na5o id ta3 kol textField 
+        String responseData = new String(data);//ba3dika na5o content 
         
-        req.setUrl(url);
-       
-        //Control saisi
-if(prenom.getText().equals("") || nom.getText().equals("") || email.getText().equals("") || dateNaissance.getText().equals("") || numTel.getText().equals("") || userRole.getSelectedItem() == null || password.getText().equals("")) {
-    Dialog.show("Erreur","Veuillez remplir les champs","OK",null);
+        System.out.println("data ===>"+responseData);
+    }
+    );
+    
+    
+    //ba3d execution ta3 requete ely heya url nestanaw response ta3 server.
+    NetworkManager.getInstance().addToQueueAndWait(req);
 }
 
-        
-        //hethi wa9t tsir execution ta3 url 
-        req.addResponseListener((e)-> {
-         
-            //njib data ly7atithom fi form 
-            byte[]data = (byte[]) e.getMetaData();//lazm awl 7aja n7athrhom ke meta data ya3ni na5o id ta3 kol textField 
-            String responseData = new String(data);//ba3dika na5o content 
-            
-            System.out.println("data ===>"+responseData);
-        }
-        );
-        
-        
-        //ba3d execution ta3 requete ely heya url nestanaw response ta3 server.
-        NetworkManager.getInstance().addToQueueAndWait(req);
-        
-            
-        
-    }
+
+
     
     
     //SignIn
@@ -93,7 +100,7 @@ if(prenom.getText().equals("") || nom.getText().equals("") || email.getText().eq
     public void signin(TextField email,TextField password, Resources rs ) {
         
         
-        String url = Statics.BASE_URL+"user/signin?email="+email.getText().toString()+"&password="+password.getText().toString();
+        String url = Statics.BASE_URL+"/users/signin?email="+email.getText().toString()+"&password="+password.getText().toString();
         req = new ConnectionRequest(url, false); //false ya3ni url mazlt matba3thtich lel server
         req.setUrl(url);
         
@@ -120,7 +127,7 @@ if(prenom.getText().equals("") || nom.getText().equals("") || email.getText().eq
                 float id = Float.parseFloat(user.get("id").toString());
                 SessionManager.setId((int)id);//jibt id ta3 user ly3ml login w sajltha fi session ta3i
                 
-                SessionManager.setPassowrd(user.get("password").toString());
+                SessionManager.setPassword(user.get("password").toString());
                 SessionManager.setEmail(user.get("email").toString());
                 
                 
