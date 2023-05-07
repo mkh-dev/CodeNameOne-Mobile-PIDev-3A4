@@ -56,7 +56,7 @@ public class ServiceUtilisateur {
 
         
      
-        String url = Statics.BASE_URL+"/user/signup?prenom="+prenom.getText().toString()+"&nom="+nom.getText().toString()+"&email="+email.getText().toString()+"&dateNaissance="+dateNaissance.getText().toString()+"&numTel="+numTel.getText().toString()+
+        String url = Statics.BASE_URL+"user/signup?prenom="+prenom.getText().toString()+"&nom="+nom.getText().toString()+"&email="+email.getText().toString()+"&dateNaissance="+dateNaissance.getText().toString()+"&numTel="+numTel.getText().toString()+
                 "&userRole="+userRole.getSelectedItem().toString()+"&password="+password.getText().toString();
 
         
@@ -93,7 +93,7 @@ if(prenom.getText().equals("") || nom.getText().equals("") || email.getText().eq
     public void signin(TextField email,TextField password, Resources rs ) {
         
         
-        String url = Statics.BASE_URL+"/user/signin?username="+email.getText().toString()+"&password="+password.getText().toString();
+        String url = Statics.BASE_URL+"user/signin?email="+email.getText().toString()+"&password="+password.getText().toString();
         req = new ConnectionRequest(url, false); //false ya3ni url mazlt matba3thtich lel server
         req.setUrl(url);
         
@@ -107,7 +107,7 @@ if(prenom.getText().equals("") || nom.getText().equals("") || email.getText().eq
             try {
             
             if(json.equals("failed")) {
-                Dialog.show("Echec d'authentification","Username ou mot de passe éronné","OK",null);
+                Dialog.show("Echec d'authentification","Email ou mot de passe éronné","OK",null);
             }
             else {
                 System.out.println("data =="+json);
@@ -148,7 +148,7 @@ if(prenom.getText().equals("") || nom.getText().equals("") || email.getText().eq
     public String getPasswordByEmail(String email, Resources rs ) {
         
         
-        String url = Statics.BASE_URL+"/user/getPasswordByEmail?email="+email;
+        String url = Statics.BASE_URL+"user/getPasswordByEmail?email="+email;
         req = new ConnectionRequest(url, false); //false ya3ni url mazlt matba3thtich lel server
         req.setUrl(url);
         

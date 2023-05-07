@@ -52,9 +52,9 @@ public class SignInForm extends BaseForm {
         
         add(BorderLayout.NORTH, new Label(res.getImage("Logo.png"), "LogoLabel"));
         
-        TextField username = new TextField("", "Email", 20, TextField.ANY);
+        TextField email = new TextField("", "Email", 20, TextField.ANY);
         TextField password = new TextField("", "Password", 20, TextField.PASSWORD);
-        username.setSingleLineTextArea(false);
+        email.setSingleLineTextArea(false);
         password.setSingleLineTextArea(false);
         Button signIn = new Button("Sign In");
         Button signUp = new Button("Sign Up");
@@ -73,7 +73,7 @@ public class SignInForm extends BaseForm {
         
         
         Container content = BoxLayout.encloseY(
-                new FloatingHint(username),
+                new FloatingHint(email),
                 createLineSeparator(),
                 new FloatingHint(password),
                 createLineSeparator(),
@@ -86,7 +86,7 @@ public class SignInForm extends BaseForm {
         
         signIn.addActionListener(e -> 
         {
-               ServiceUtilisateur.getInstance().signin(username, password, res);
+               ServiceUtilisateur.getInstance().signin(email, password, res);
 
            
         });
