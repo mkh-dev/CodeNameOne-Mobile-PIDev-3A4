@@ -56,7 +56,7 @@ public class ServiceUtilisateur {
 
         
      
-        String url = Statics.BASE_URL+"/register?prenom="+prenom.getText().toString()+"&nom="+nom.getText().toString()+"&email="+email.getText().toString()+"&dateNaissance="+dateNaissance.getText().toString()+"&numTel="+numTel.getText().toString()+
+        String url = Statics.BASE_URL+"/user/signup?prenom="+prenom.getText().toString()+"&nom="+nom.getText().toString()+"&email="+email.getText().toString()+"&dateNaissance="+dateNaissance.getText().toString()+"&numTel="+numTel.getText().toString()+
                 "&userRole="+userRole.getSelectedItem().toString()+"&password="+password.getText().toString();
 
         

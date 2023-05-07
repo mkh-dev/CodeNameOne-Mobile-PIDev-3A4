@@ -52,7 +52,7 @@ public class ServiceReclamation {
     //ajout 
     public void ajoutReclamation(Reclamation reclamation) {
         
-        String url =Statics.BASE_URL+"/newreclamations_mobile?prenom="+reclamation.getPrenom()+"&nom="+reclamation.getNom()+"&email="+reclamation.getEmail()+"&message="+reclamation.getMessage(); // aa sorry n3adi getId lyheya mech ta3 user ta3 reclamation
+        String url =Statics.BASE_URL+"/addReclamation?prenom="+reclamation.getPrenom()+"&nom="+reclamation.getNom()+"&email="+reclamation.getEmail()+"&message="+reclamation.getMessage(); // aa sorry n3adi getId lyheya mech ta3 user ta3 reclamation
         
         req.setUrl(url);
         req.addResponseListener((e) -> {
@@ -71,7 +71,7 @@ public class ServiceReclamation {
     public ArrayList<Reclamation>affichageReclamations() {
         ArrayList<Reclamation> result = new ArrayList<>();
         
-        String url = Statics.BASE_URL+"/reclamations_mobile";
+        String url = Statics.BASE_URL+"/displayReclamations";
         req.setUrl(url);
         
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -131,7 +131,7 @@ public class ServiceReclamation {
     
     public Reclamation DetailRecalamation( int id , Reclamation reclamation) {
         
-        String url = Statics.BASE_URL+"/reclamations_mobile?"+id;
+        String url = Statics.BASE_URL+"/detailReclamation"+id;
         req.setUrl(url);
         
         String str  = new String(req.getResponseData());
@@ -168,7 +168,7 @@ public class ServiceReclamation {
     
     //Delete 
     public boolean deleteReclamation(int id ) {
-        String url = Statics.BASE_URL +"/SupprimerReclamations?id="+id;
+        String url = Statics.BASE_URL +"/deleteReclamation?id="+id;
         
         req.setUrl(url);
         
@@ -188,7 +188,7 @@ public class ServiceReclamation {
     
     //Update 
     public boolean modifierReclamation(Reclamation reclamation) {
-        String url = Statics.BASE_URL + "/updateReclamations?id=" + reclamation.getId() + "&prenom=" + reclamation.getPrenom() + "&nom=" + reclamation.getNom() + "&email=" + reclamation.getEmail() + "&message=" + reclamation.getMessage();
+        String url = Statics.BASE_URL + "/updateReclamation?id=" + reclamation.getId() + "&prenom=" + reclamation.getPrenom() + "&nom=" + reclamation.getNom() + "&email=" + reclamation.getEmail() + "&message=" + reclamation.getMessage();
 
         req.setUrl(url);
         
