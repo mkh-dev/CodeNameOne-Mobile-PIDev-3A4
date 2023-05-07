@@ -52,7 +52,7 @@ public class ServiceReclamation {
     //ajout 
     public void ajoutReclamation(Reclamation reclamation) {
         
-        String url =Statics.BASE_URL+"/addReclamation?objet="+reclamation.getObjet()+"&description="+reclamation.getDescription()+"&user="+reclamation.getIduser(); // aa sorry n3adi getId lyheya mech ta3 user ta3 reclamation
+        String url =Statics.BASE_URL+"/newreclamations_mobile?prenom="+reclamation.getPrenom()+"&nom="+reclamation.getNom()+"&email="+reclamation.getEmail()+"&message="+reclamation.getMessage(); // aa sorry n3adi getId lyheya mech ta3 user ta3 reclamation
         
         req.setUrl(url);
         req.addResponseListener((e) -> {
@@ -71,7 +71,7 @@ public class ServiceReclamation {
     public ArrayList<Reclamation>affichageReclamations() {
         ArrayList<Reclamation> result = new ArrayList<>();
         
-        String url = Statics.BASE_URL+"/displayReclamations";
+        String url = Statics.BASE_URL+"/reclamations_mobile";
         req.setUrl(url);
         
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -91,24 +91,18 @@ public class ServiceReclamation {
                         //dima id fi codename one float 5outhouha
                         float id = Float.parseFloat(obj.get("id").toString());
                         
-                        String objet = obj.get("objet").toString();
+                        String prenom = obj.get("prenom").toString();
                         
-                        String description = obj.get("description").toString();
-                        float etat = Float.parseFloat(obj.get("etat").toString());
+                        String nom = obj.get("nom").toString();
+                        String email = obj.get("email").toString();
+                        String message = obj.get("message").toString();
                         
                         re.setId((int)id);
-                        re.setObjet(objet);
-                        re.setDescription(description);
-                        re.setEtat((int)etat);
+                        re.setPrenom(prenom);
+                        re.setNom(nom);
+                         re.setEmail(email);
+                         re.setMessage(message);
                         
-                        //Date 
-                        String DateConverter =  obj.get("date").toString().substring(obj.get("date").toString().indexOf("timestamp") + 10 , obj.get("date").toString().lastIndexOf("}"));
-                        
-                        Date currentTime = new Date(Double.valueOf(DateConverter).longValue() * 1000);
-                        
-                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                        String dateString = formatter.format(currentTime);
-                        re.setDate(dateString);
                         
                         //insert data into ArrayList result
                         result.add(re);
@@ -137,7 +131,7 @@ public class ServiceReclamation {
     
     public Reclamation DetailRecalamation( int id , Reclamation reclamation) {
         
-        String url = Statics.BASE_URL+"/detailReclamation?"+id;
+        String url = Statics.BASE_URL+"/reclamations_mobile?"+id;
         req.setUrl(url);
         
         String str  = new String(req.getResponseData());
@@ -148,9 +142,10 @@ public class ServiceReclamation {
                 
                 Map<String,Object>obj = jsonp.parseJSON(new CharArrayReader(new String(str).toCharArray()));
                 
-                reclamation.setObjet(obj.get("obj").toString());
-                reclamation.setDescription(obj.get("description").toString());
-                reclamation.setEtat(Integer.parseInt(obj.get("etat").toString()));
+                reclamation.setPrenom(obj.get("prenom").toString());
+                reclamation.setNom(obj.get("nom").toString());
+                reclamation.setEmail(obj.get("email").toString());
+                reclamation.setMessage(obj.get("message").toString());
                 
             }catch(IOException ex) {
                 System.out.println("error related to sql :( "+ex.getMessage());
@@ -173,7 +168,7 @@ public class ServiceReclamation {
     
     //Delete 
     public boolean deleteReclamation(int id ) {
-        String url = Statics.BASE_URL +"/deleteReclamation?id="+id;
+        String url = Statics.BASE_URL +"/SupprimerReclamations?id="+id;
         
         req.setUrl(url);
         
@@ -193,7 +188,8 @@ public class ServiceReclamation {
     
     //Update 
     public boolean modifierReclamation(Reclamation reclamation) {
-        String url = Statics.BASE_URL +"/updateReclamation?id="+reclamation.getId()+"&objet="+reclamation.getObjet()+"&description="+reclamation.getDescription()+"&etat="+reclamation.getEtat();
+        String url = Statics.BASE_URL + "/updateReclamations?id=" + reclamation.getId() + "&prenom=" + reclamation.getPrenom() + "&nom=" + reclamation.getNom() + "&email=" + reclamation.getEmail() + "&message=" + reclamation.getMessage();
+
         req.setUrl(url);
         
         req.addResponseListener(new ActionListener<NetworkEvent>() {

@@ -21,7 +21,9 @@ package com.mycompany.gui;
 
 import com.codename1.components.FloatingHint;
 import com.codename1.ui.Button;
+import com.codename1.ui.ComboBox;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
@@ -31,6 +33,8 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.mycompany.services.ServiceUtilisateur;
+import java.util.Vector;
 
 /**
  * Signup UI
@@ -49,30 +53,56 @@ public class SignUpForm extends BaseForm {
         tb.setBackCommand("", e -> previous.showBack());
         setUIID("SignIn");
                 
-        TextField username = new TextField("", "Username", 20, TextField.ANY);
+        TextField prenom = new TextField("", "Prenom", 20, TextField.ANY);
+        TextField nom = new TextField("", "Nom", 20, TextField.ANY);
         TextField email = new TextField("", "E-Mail", 20, TextField.EMAILADDR);
+        TextField dateNaissance = new TextField("", "Date de Naissance", 20, TextField.PASSWORD);
+        TextField numTel = new TextField("", "Numéro de téléphone", 20, TextField.PASSWORD);
         TextField password = new TextField("", "Password", 20, TextField.PASSWORD);
-        TextField confirmPassword = new TextField("", "Confirm Password", 20, TextField.PASSWORD);
-        username.setSingleLineTextArea(false);
+        
+           //Role 
+        //Vector 3ibara ala array 7atit fiha roles ta3na ba3d nzidouhom lel comboBox
+        Vector<String> vectorRole;
+        vectorRole = new Vector();
+        
+        vectorRole.add("Utilisateur");
+        vectorRole.add("Organisateur");
+        vectorRole.add("Transporteur");
+        vectorRole.add("Partenaire");
+        
+        ComboBox<String>userRole = new ComboBox<>(vectorRole);
+        
+        
+        
+        
+        nom.setSingleLineTextArea(false);
+        prenom.setSingleLineTextArea(false);
         email.setSingleLineTextArea(false);
+        dateNaissance.setSingleLineTextArea(false);
+        numTel.setSingleLineTextArea(false);
         password.setSingleLineTextArea(false);
-        confirmPassword.setSingleLineTextArea(false);
-        Button next = new Button("Next");
+
+        Button next = new Button("SignUp");
         Button signIn = new Button("Sign In");
-        signIn.addActionListener(e -> previous.showBack());
+        signIn.addActionListener(e -> new SignInForm(res).show());
         signIn.setUIID("Link");
         Label alreadHaveAnAccount = new Label("Already have an account?");
         
         Container content = BoxLayout.encloseY(
                 new Label("Sign Up", "LogoLabel"),
-                new FloatingHint(username),
+                new FloatingHint(prenom),
+                createLineSeparator(),
+                new FloatingHint(nom),
                 createLineSeparator(),
                 new FloatingHint(email),
                 createLineSeparator(),
+                new FloatingHint(dateNaissance),
+                createLineSeparator(),
+                new FloatingHint(numTel),
+                createLineSeparator(),
                 new FloatingHint(password),
                 createLineSeparator(),
-                new FloatingHint(confirmPassword),
-                createLineSeparator()
+                userRole//sinon y7otich role fi form ta3 signup
         );
         content.setScrollableY(true);
         add(BorderLayout.CENTER, content);
@@ -81,7 +111,12 @@ public class SignUpForm extends BaseForm {
                 FlowLayout.encloseCenter(alreadHaveAnAccount, signIn)
         ));
         next.requestFocus();
-        next.addActionListener(e -> new ActivateForm(res).show());
+        next.addActionListener((e) -> {
+            
+            ServiceUtilisateur.getInstance().signup(prenom, nom, email, dateNaissance, numTel, userRole, password, res);
+            Dialog.show("Success","account is saved","OK",null);
+            new SignInForm(res).show();
+        });
     }
     
 }

@@ -19,6 +19,7 @@ import com.mycompany.gui.ListReclamationForm;
 import com.mycompany.gui.SessionManager;
 import java.util.Map;
 import java.util.Vector;
+import javafx.scene.control.DatePicker;
 
 /**
  *
@@ -51,21 +52,21 @@ public class ServiceUtilisateur {
     }
     
     //Signup
-    public void signup(TextField username,TextField password,TextField email,TextField confirmPassword, ComboBox<String> roles , Resources res ) {
+    public void signup(TextField prenom, TextField nom, TextField email, TextField dateNaissance, TextField numTel, ComboBox<String> userRole, TextField password, Resources res) {
+
         
      
-        
-        String url = Statics.BASE_URL+"/user/signup?username="+username.getText().toString()+"&email="+email.getText().toString()+
-                "&password="+password.getText().toString()+"&roles="+roles.getSelectedItem().toString();
+        String url = Statics.BASE_URL+"/register?prenom="+prenom.getText().toString()+"&nom="+nom.getText().toString()+"&email="+email.getText().toString()+"&dateNaissance="+dateNaissance.getText().toString()+"&numTel="+numTel.getText().toString()+
+                "&userRole="+userRole.getSelectedItem().toString()+"&password="+password.getText().toString();
+
         
         req.setUrl(url);
        
         //Control saisi
-        if(username.getText().equals(" ") && password.getText().equals(" ") && email.getText().equals(" ")) {
-            
-            Dialog.show("Erreur","Veuillez remplir les champs","OK",null);
-            
-        }
+if(prenom.getText().equals("") || nom.getText().equals("") || email.getText().equals("") || dateNaissance.getText().equals("") || numTel.getText().equals("") || userRole.getSelectedItem() == null || password.getText().equals("")) {
+    Dialog.show("Erreur","Veuillez remplir les champs","OK",null);
+}
+
         
         //hethi wa9t tsir execution ta3 url 
         req.addResponseListener((e)-> {
@@ -89,10 +90,10 @@ public class ServiceUtilisateur {
     
     //SignIn
     
-    public void signin(TextField username,TextField password, Resources rs ) {
+    public void signin(TextField email,TextField password, Resources rs ) {
         
         
-        String url = Statics.BASE_URL+"/user/signin?username="+username.getText().toString()+"&password="+password.getText().toString();
+        String url = Statics.BASE_URL+"/user/signin?username="+email.getText().toString()+"&password="+password.getText().toString();
         req = new ConnectionRequest(url, false); //false ya3ni url mazlt matba3thtich lel server
         req.setUrl(url);
         
@@ -120,13 +121,8 @@ public class ServiceUtilisateur {
                 SessionManager.setId((int)id);//jibt id ta3 user ly3ml login w sajltha fi session ta3i
                 
                 SessionManager.setPassowrd(user.get("password").toString());
-                SessionManager.setUserName(user.get("username").toString());
                 SessionManager.setEmail(user.get("email").toString());
                 
-                //photo 
-                
-                if(user.get("photo") != null)
-                    SessionManager.setPhoto(user.get("photo").toString());
                 
                 
                 if(user.size() >0 ) // l9a user
