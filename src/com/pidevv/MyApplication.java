@@ -14,6 +14,8 @@ import java.io.IOException;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.io.NetworkEvent;
 import com.mycompany.gui.AjoutReclamationForm;
+import com.mycompany.gui.ModifierReclamationForm;
+import com.mycompany.gui.ListReclamationForm;
 import com.mycompany.gui.SignInForm;
 import com.mycompany.gui.SignUpForm;
 import com.mycompany.gui.StatistiquePieForm;
@@ -56,8 +58,9 @@ public class MyApplication {
             return;
         }
         //houni awl interface yet7al
+      new  ListReclamationForm(theme).show();
         //new AjoutReclamationForm(theme).show(); 
-       new SignInForm(theme).show();
+      //new SignInForm(theme).show();
     }
 
     public void stop() {

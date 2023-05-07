@@ -59,7 +59,7 @@ public void signup(TextField prenom, TextField nom, TextField email, Picker date
     // Format de la date de naissance
     String dateNaissanceStr = datenaissance.getText();
     
-    String url = Statics.BASE_URL+"/users/signup?prenom="+prenom.getText().toString()
+    String url = Statics.BASE_URL+"users/signup?prenom="+prenom.getText().toString()
                                             +"&nom="+nom.getText().toString()
                                             +"&email="+email.getText().toString()
                                             +"&datenaissance="+dateNaissanceStr
@@ -100,7 +100,7 @@ public void signup(TextField prenom, TextField nom, TextField email, Picker date
     public void signin(TextField email,TextField password, Resources rs ) {
         
         
-        String url = Statics.BASE_URL+"/users/signin?email="+email.getText().toString()+"&password="+password.getText().toString();
+        String url = Statics.BASE_URL+"users/signin?email="+email.getText().toString()+"&password="+password.getText().toString();
         req = new ConnectionRequest(url, false); //false ya3ni url mazlt matba3thtich lel server
         req.setUrl(url);
         
@@ -155,7 +155,7 @@ public void signup(TextField prenom, TextField nom, TextField email, Picker date
     public String getPasswordByEmail(String email, Resources rs ) {
         
         
-        String url = Statics.BASE_URL+"user/getPasswordByEmail?email="+email;
+        String url = Statics.BASE_URL+"users/getPasswordByEmail?email="+email;
         req = new ConnectionRequest(url, false); //false ya3ni url mazlt matba3thtich lel server
         req.setUrl(url);
         

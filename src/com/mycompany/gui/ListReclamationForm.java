@@ -139,7 +139,7 @@ public class ListReclamationForm extends BaseForm{
                InfiniteProgress ip = new InfiniteProgress();
         final Dialog ipDlg = ip.showInifiniteBlocking();
         
-        //  ListReclamationForm a = new ListReclamationForm(res);
+        // ListReclamationForm a = new ListReclamationForm(res);
           //  a.show();
             refreshTheme();
         });
