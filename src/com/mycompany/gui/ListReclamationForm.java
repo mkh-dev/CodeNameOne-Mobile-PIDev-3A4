@@ -267,7 +267,7 @@ public class ListReclamationForm extends BaseForm{
         Label messageTxt = new Label("Message : "+rec.getMessage(),"NewsTopLine2" );
         
         createLineSeparator();
-        
+ 
         
         //supprimer button
         Label lSupprimer = new Label(" ");

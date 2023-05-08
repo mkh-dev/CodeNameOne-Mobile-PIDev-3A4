@@ -6,7 +6,10 @@
 package com.mycompany.gui;
 
 import com.codename1.io.Preferences;
+import java.text.ParseException;
 import java.util.Date;
+import java.text.SimpleDateFormat;
+
 
 /**
  *
@@ -37,67 +40,80 @@ private static String password ;
     }
 
     public static int getId() {
-        return id;
+        return pref.get("id",id);
     }
 
     public static void setId(int id) {
-        SessionManager.id = id;
+        pref.set("id",id);
     }
 
     public static String getPrenom() {
-        return prenom;
+       return pref.get("prenom",prenom);
     }
 
     public static void setPrenom(String prenom) {
-        SessionManager.prenom = prenom;
+       pref.set("prenom",prenom);
     }
 
     public static String getNom() {
-        return nom;
+       return pref.get("nom",nom);
     }
 
     public static void setNom(String nom) {
-        SessionManager.nom = nom;
+        pref.set("nom",nom);
     }
 
     public static String getEmail() {
-        return email;
+        return pref.get("email",email);
     }
 
     public static void setEmail(String email) {
-        SessionManager.email = email;
+        pref.set("email",email);
     }
 
-    public static Date getDatenaissance() {
-        return datenaissance;
-    }
+public static void setDatenaissance(Date datenaissance) {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    String dateStr = dateFormat.format(datenaissance);
+    pref.set("datenaissance", dateStr);
+}
 
-    public static void setDatenaissance(Date datenaissance) {
-        SessionManager.datenaissance = datenaissance;
+public static Date getDatenaissance() {
+    String dateStr = pref.get("datenaissance", null);
+    if (dateStr == null) {
+        return null;
+    } else {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return dateFormat.parse(dateStr);
+        } catch (ParseException ex) {
+            return null;
+        }
     }
+}
+
 
     public static int getNumtel() {
-        return numtel;
+       return pref.get("numtel",numtel);
     }
 
     public static void setNumtel(int numtel) {
-        SessionManager.numtel = numtel;
+        pref.set("numtel",numtel);
     }
 
     public static String getUserrole() {
-        return userrole;
+        return pref.get("userrole",userrole);
     }
 
     public static void setUserrole(String userrole) {
-        SessionManager.userrole = userrole;
+        pref.set("userrole",userrole);
     }
 
     public static String getPassword() {
-        return password;
+        return pref.get("password",password);
     }
 
     public static void setPassword(String password) {
-        SessionManager.password = password;
+        pref.set("password",password);
     }
 
     
@@ -105,3 +121,4 @@ private static String password ;
     
     
 }
+

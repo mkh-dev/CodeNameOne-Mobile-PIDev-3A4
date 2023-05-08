@@ -58,8 +58,8 @@ public class MyApplication {
             return;
         }
         //houni awl interface yet7al
-      new  ListReclamationForm(theme).show();
-        //new AjoutReclamationForm(theme).show(); 
+      //new  ListReclamationForm(theme).show();
+        new AjoutReclamationForm(theme).show(); 
       //new SignInForm(theme).show();
     }
 
