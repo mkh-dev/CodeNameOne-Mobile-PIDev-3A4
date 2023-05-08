@@ -34,6 +34,18 @@ import com.mycompany.services.ServiceReclamation;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.*;
+import javax.mail.internet.*;
+
+
 /**
  *
  * @author Lenovo
@@ -52,6 +64,9 @@ public class AjoutReclamationForm extends BaseForm {
         setTitle("Ajout Reclamation");
         getContentPane().setScrollVisible(false);
         
+        
+        super.addSideMenu(res);
+
         
         tb.addSearchCommand(e ->  {
             
@@ -147,22 +162,22 @@ public class AjoutReclamationForm extends BaseForm {
         
       
 
-        TextField prenom = new TextField("", "entrer Prenom!!");
+        TextField prenom = new TextField("", "Entrez votre Prénom");
         prenom.setUIID("TextFieldBlack");
-        addStringValue("Prenom",prenom);
+        addStringValue("Prénom",prenom);
         
         
-                TextField nom = new TextField("", "entrer Nom!!");
+                TextField nom = new TextField("", "Entrez votre Nom");
         nom.setUIID("TextFieldBlack");
         addStringValue("Nom",nom);
         
         
         
-          TextField email = new TextField("", "entrer Email!!");
+          TextField email = new TextField("", "Entrez votre Email");
         email.setUIID("TextFieldBlack");
         addStringValue("Email",email);
         
-        TextField message = new TextField("", "entrer message!!");
+        TextField message = new TextField("", "Entrez votre Message");
         message.setUIID("TextFieldBlack");
         addStringValue("Message",message);
         
@@ -201,6 +216,14 @@ public class AjoutReclamationForm extends BaseForm {
                     
                     //appelle methode ajouterReclamation mt3 service Reclamation bch nzido données ta3na fi base 
                     ServiceReclamation.getInstance().ajoutReclamation(r);
+                    
+                    //envoyer un e-mail après avoir enregistré les détails de la réclamation dans la base de données
+String destinataire = "pidevevento@gmail.com";
+String sujet = "Confirmation d'ajout de réclamation";
+String corps = "Bonjour,\n\nNous vous informons que votre réclamation a été ajoutée avec succès. Nous avons bien pris en compte votre demande et nous allons la traiter dans les plus brefs délais.\n\nSi vous avez des questions ou des préoccupations supplémentaires, n'hésitez pas à nous contacter en répondant à cet e-mail ou en utilisant les coordonnées disponibles sur notre site.\n\nNous vous remercions de votre confiance et nous sommes impatients de vous fournir un service de qualité.\n\nCordialement,\n\nL'équipe Evento";
+
+
+envoyerEmail(destinataire, sujet, corps);
                     
                     iDialog.dispose(); //na7io loading ba3d ma3mlna ajout
                     
@@ -286,7 +309,43 @@ public class AjoutReclamationForm extends BaseForm {
         
         l.getUnselectedStyle().setMargin(LEFT, btn.getX() + btn.getWidth()  / 2  - l.getWidth() / 2 );
         l.getParent().repaint();
+        
+        
     }
+    
+    public void envoyerEmail(String destinataire, String sujet, String corps) throws MessagingException {
+
+    //les détails du compte e-mail à partir duquel l'e-mail sera envoyé
+    String utilisateur = "pidevevento@gmail.com";
+    String motDePasse = "pixtlpzpocvcpvza";
+    String serveurSmtp = "smtp.gmail.com";
+    int portSmtp = 587;
+
+    //Configurer les propriétés de l'e-mail
+    Properties propriétés = new Properties();
+    propriétés.put("mail.smtp.auth", "true");
+    propriétés.put("mail.smtp.starttls.enable", "true");
+    propriétés.put("mail.smtp.host", serveurSmtp);
+    propriétés.put("mail.smtp.port", portSmtp);
+
+    //Créer une session de messagerie avec l'authentification
+    Session session = Session.getInstance(propriétés, new Authenticator() {
+        protected PasswordAuthentication getPasswordAuthentication() {
+            return new PasswordAuthentication(utilisateur, motDePasse);
+        }
+    });
+
+    //Créer le message e-mail
+    Message message = new MimeMessage(session);
+    message.setFrom(new InternetAddress(utilisateur));
+    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinataire));
+    message.setSubject(sujet);
+    message.setText(corps);
+
+    //Envoyer l'e-mail
+    Transport.send(message);
+}
+
     
    
    

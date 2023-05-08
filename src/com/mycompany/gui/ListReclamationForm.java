@@ -48,13 +48,18 @@ public class ListReclamationForm extends BaseForm{
     
     Form current;
     public ListReclamationForm(Resources res ) {
-          super("Newsfeed",BoxLayout.y()); //herigate men Newsfeed w l formulaire vertical
+     super("Newsfeed",BoxLayout.y()); //herigate men Newsfeed w l formulaire vertical
+    
         Toolbar tb = new Toolbar(true);
         current = this ;
         setToolbar(tb);
         getTitleArea().setUIID("Container");
         setTitle("Ajout Reclamation");
         getContentPane().setScrollVisible(false);
+        
+        
+        super.addSideMenu(res);
+
         
         
         tb.addSearchCommand(e ->  {
@@ -67,23 +72,6 @@ public class ListReclamationForm extends BaseForm{
         Label s2 = new Label();
         
         addTab(swipe,s1, res.getImage("back-logo.jpeg"),"","",res);
-        
-        // Welcome current user
-        
-        System.out.println("user connecté id ="+ SessionManager.getId());
-        
-        System.out.println("user connecté nom ="+ SessionManager.getNom());
-        
-        System.out.println("user connecté prenom ="+ SessionManager.getPrenom());
-        
-        System.out.println("user connecté date de naissance ="+ SessionManager.getDatenaissance());
-        
-        System.out.println("user connecté numéro de téléphone ="+ SessionManager.getNumtel());
-        
-        System.out.println("user connecté role ="+ SessionManager.getUserrole());
-        
-        System.out.println("user connecté mot de passe ="+ SessionManager.getPassword());
-        
         
         
         
@@ -139,7 +127,7 @@ public class ListReclamationForm extends BaseForm{
                InfiniteProgress ip = new InfiniteProgress();
         final Dialog ipDlg = ip.showInifiniteBlocking();
         
-        // ListReclamationForm a = new ListReclamationForm(res);
+        //  ListReclamationForm a = new ListReclamationForm(res);
           //  a.show();
             refreshTheme();
         });
@@ -261,13 +249,19 @@ public class ListReclamationForm extends BaseForm{
         
         
         //kif nzidouh  ly3endo date mathbih fi codenamone y3adih string w y5alih f symfony dateTime w ytab3ni cha3mlt taw yjih
-        Label prenomTxt = new Label("Prenom : "+rec.getPrenom(),"NewsTopLine2");
-        Label nomTxt = new Label("Nom : "+rec.getNom(),"NewsTopLine2");
+          Label prenomTxt = new Label("Prenom : "+rec.getPrenom(),"NewsTopLine2");
+             Label nomTxt = new Label("Nom : "+rec.getNom(),"NewsTopLine2");
         Label emailTxt = new Label("Email : "+rec.getEmail(),"NewsTopLine2" );
         Label messageTxt = new Label("Message : "+rec.getMessage(),"NewsTopLine2" );
         
         createLineSeparator();
- 
+        
+        if(rec.getMessage() == " " ) {
+            messageTxt.setText("━━━━━━━━━");
+        }
+        else 
+            messageTxt.setText("━━━━━━━━━");
+       
         
         //supprimer button
         Label lSupprimer = new Label(" ");
@@ -316,11 +310,11 @@ public class ListReclamationForm extends BaseForm{
         
         cnt.add(BorderLayout.CENTER,BoxLayout.encloseY(
                 
+          
                 BoxLayout.encloseX(prenomTxt),
                 BoxLayout.encloseX(nomTxt),
                 BoxLayout.encloseX(emailTxt),
-                BoxLayout.encloseX(messageTxt)));
-        
+                BoxLayout.encloseX(messageTxt,lModifier,lSupprimer)));
         
         
         add(cnt);

@@ -38,15 +38,16 @@ public class ModifierReclamationForm extends BaseForm {
         
         super.addSideMenu(res);
         
-        TextField prenom = new TextField(r.getPrenom() , "Prenom" , 20 , TextField.ANY);
+        TextField prenom = new TextField(r.getPrenom() , "Prénom" , 20 , TextField.ANY);
         TextField nom = new TextField(r.getNom() , "Nom" , 20 , TextField.ANY);
-        TextField email = new TextField(r.getEmail() , "Email" , 20 , TextField.ANY);
-        TextField message = new TextField(String.valueOf(r.getMessage()) , "Message" , 20 , TextField.ANY);
+        TextField email = new TextField(r.getEmail() , "email" , 20 , TextField.ANY);
+        TextField message = new TextField(r.getMessage() , "Message" , 20 , TextField.ANY);
  
         
         
         
-         
+        
+        
         prenom.setUIID("NewsTopLine");
         nom.setUIID("NewsTopLine");
         email.setUIID("NewsTopLine");
@@ -65,11 +66,9 @@ public class ModifierReclamationForm extends BaseForm {
        btnModifier.addPointerPressedListener(l ->   { 
            
            r.setPrenom(prenom.getText());
-            r.setNom(nom.getText());
-             r.setEmail(email.getText());
+           r.setNom(nom.getText());
+           r.setEmail(email.getText());
            r.setMessage(message.getText());
-           
-     
        
        //appel fonction modfier reclamation men service
        
@@ -99,10 +98,10 @@ public class ModifierReclamationForm extends BaseForm {
                 createLineSeparator(),
                 new FloatingHint(nom),
                 createLineSeparator(),
-                new FloatingHint(email),
+                 new FloatingHint(email),
                 createLineSeparator(),
-                new FloatingHint(email),
-                createLineSeparator(),//ligne de séparation
+                 new FloatingHint(message),
+                createLineSeparator(),
                 btnModifier,
                 btnAnnuler
                 
@@ -115,4 +114,3 @@ public class ModifierReclamationForm extends BaseForm {
         
     }
 }
-
