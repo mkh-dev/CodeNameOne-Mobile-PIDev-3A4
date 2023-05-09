@@ -12,6 +12,7 @@ import com.codename1.components.ToastBar;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.io.Log;
 import com.codename1.ui.Button;
+import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
@@ -20,6 +21,7 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.URLImage;
+import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.UIManager;
@@ -45,6 +47,10 @@ public class ProduitForm extends BaseForm{
      
      
            super("Produits",BoxLayout.y());
+           
+           
+       
+   
                  this.add(new InfiniteProgress());
         Display.getInstance().scheduleBackgroundTask(() -> {
             // this will take a while...
