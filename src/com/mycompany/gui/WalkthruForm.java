@@ -84,7 +84,7 @@ public class WalkthruForm extends Form {
         g.fillArc(0, 0, size, size, 0, 360);
         Image selectedWalkthru = Image.createImage(size, size, 0);
         g = selectedWalkthru.getGraphics();
-        g.setColor(0xff2d55);
+        g.setColor(0xE9AD19); 
         g.setAntiAliased(true);
         g.fillArc(0, 0, size, size, 0, 360);
         RadioButton[] rbs = new RadioButton[t.getTabCount()];
