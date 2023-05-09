@@ -256,12 +256,7 @@ public class ListReclamationForm extends BaseForm{
         
         createLineSeparator();
         
-        if(rec.getMessage() == " " ) {
-            messageTxt.setText("━━━━━━━━━");
-        }
-        else 
-            messageTxt.setText("━━━━━━━━━");
-       
+     
         
         //supprimer button
         Label lSupprimer = new Label(" ");
