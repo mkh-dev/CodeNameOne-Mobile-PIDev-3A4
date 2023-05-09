@@ -188,64 +188,69 @@ public class AjoutReclamationForm extends BaseForm {
         
         //onclick button event 
 
-        btnAjouter.addActionListener((e) -> {
-            
-            
+     btnAjouter.addActionListener((e) -> {
+
             try {
-                
-                if(nom.getText().equals("") || prenom.getText().equals("") || email.getText().equals("") || message.getText().equals("")) {
-                    Dialog.show("Veuillez vérifier les données","","Annuler", "OK");
+
+                if (nom.getText().equals("") || prenom.getText().equals("") || email.getText().equals("") || message.getText().equals("")) {
+                    Dialog.show("Veuillez vérifier les données", "", "Annuler", "OK");
+                } else {
+
+                    // check for forbidden words in message
+                    String[] forbiddenWords = {"mot1", "mot2", "mot3"}; // add your list of forbidden words
+                    boolean messageContainsForbiddenWords = false;
+
+                    for (String word : forbiddenWords) {
+                        if (message.getText().toLowerCase().contains(word.toLowerCase())) {
+                            messageContainsForbiddenWords = true;
+                            break;
+                        }
+                    }
+
+                    if (messageContainsForbiddenWords) {
+                        // send email notifying the user about the forbidden words in their message
+                        String destinataire = email.getText();
+                        String sujet = "Réclamation rejetée";
+                        String corps = "Bonjour,\n\nNous avons détecté que votre message contient des mots interdits. Veuillez réviser votre message et envoyer à nouveau votre réclamation.\n\nCordialement,\n\nL'équipe Evento";
+
+                        envoyerEmail(destinataire, sujet, corps);
+                    } else {
+                        // add the new claim to the database
+                        InfiniteProgress ip = new InfiniteProgress(); // Loading  after insert data
+
+                        final Dialog iDialog = ip.showInfiniteBlocking();
+
+                        Reclamation r = new Reclamation(String.valueOf(prenom.getText()).toString(),
+                                nom.getText().toString(),
+                                email.getText().toString(),
+                                String.valueOf(message.getText()).toString());
+
+                        ServiceReclamation.getInstance().ajoutReclamation(r);
+
+                        // send email confirming successful addition of claim to the database
+                        String destinataire = email.getText();
+                        String sujet = "Confirmation d'ajout de réclamation";
+                        String corps = "Bonjour,\n\nNous vous informons que votre réclamation a été ajoutée avec succès. Nous avons bien pris en compte votre demande et nous allons la traiter dans les plus brefs délais.\n\nSi vous avez des questions ou des préoccupations supplémentaires, n'hésitez pas à nous contacter en répondant à cet e-mail ou en utilisant les coordonnées disponibles sur notre site.\n\nNous vous remercions de votre confiance et nous sommes impatients de vous fournir un service de qualité.\n\nCordialement,\n\nL'équipe Evento";
+
+                        envoyerEmail(destinataire, sujet, corps);
+
+                        iDialog.dispose(); // remove the loading indicator after adding the claim
+
+                        // navigate to the ListReclamationForm after adding the new claim
+                        new ListReclamationForm(res).show();
+
+                        refreshTheme(); // Refresh the theme
+
+                    }
+
                 }
-                
-                else {
-                    InfiniteProgress ip = new InfiniteProgress();; //Loading  after insert data
-                
-                    final Dialog iDialog = ip.showInfiniteBlocking();
-                    
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                    
-                    //njibo iduser men session (current user)
-                 Reclamation r = new Reclamation(String.valueOf(prenom.getText()).toString(),
-                                 nom.getText().toString(),
-                                 email.getText().toString(),
-                                 String.valueOf(message.getText()).toString());
 
-                    
-                    System.out.println("data  reclamation == "+r);
-                    
-                    
-                    //appelle methode ajouterReclamation mt3 service Reclamation bch nzido données ta3na fi base 
-                    ServiceReclamation.getInstance().ajoutReclamation(r);
-                    
-                    //envoyer un e-mail après avoir enregistré les détails de la réclamation dans la base de données
-String destinataire = "pidevevento@gmail.com";
-String sujet = "Confirmation d'ajout de réclamation";
-String corps = "Bonjour,\n\nNous vous informons que votre réclamation a été ajoutée avec succès. Nous avons bien pris en compte votre demande et nous allons la traiter dans les plus brefs délais.\n\nSi vous avez des questions ou des préoccupations supplémentaires, n'hésitez pas à nous contacter en répondant à cet e-mail ou en utilisant les coordonnées disponibles sur notre site.\n\nNous vous remercions de votre confiance et nous sommes impatients de vous fournir un service de qualité.\n\nCordialement,\n\nL'équipe Evento";
-
-
-envoyerEmail(destinataire, sujet, corps);
-                    
-                    iDialog.dispose(); //na7io loading ba3d ma3mlna ajout
-                    
-                    //ba3d ajout net3adaw lel ListREclamationForm
-                    new ListReclamationForm(res).show();
-                    
-                    
-                    refreshTheme();//Actualisation
-                            
-                }
-                
-            }catch(Exception ex ) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            
-            
-            
-            
-            
+
         });
-        
-        
+
     }
 
     private void addStringValue(String s, Component v) {
