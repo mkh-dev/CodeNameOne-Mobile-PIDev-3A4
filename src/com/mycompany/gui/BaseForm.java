@@ -86,6 +86,8 @@ public class BaseForm extends Form {
         tb.addMaterialCommandToSideMenu("Mon Profile", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
         tb.addMaterialCommandToSideMenu("Mes Réclamations", FontImage.MATERIAL_ACCOUNT_BOX, e -> new AjoutReclamationForm(res).show());
         tb.addMaterialCommandToSideMenu("Déconnexion", FontImage.MATERIAL_EXIT_TO_APP, e -> new WalkthruForm(res).show()); 
+        tb.addMaterialCommandToSideMenu("Gestion des produits ", FontImage.MATERIAL_EXIT_TO_APP, e -> new ProduitForm(this).show());
+        tb.addMaterialCommandToSideMenu("Liste des produits", FontImage.MATERIAL_EXIT_TO_APP, e -> new ListeProduit(res).show());
 
 
         
