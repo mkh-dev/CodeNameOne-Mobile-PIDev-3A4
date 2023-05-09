@@ -79,15 +79,15 @@ public class BaseForm extends Form {
         tb.addComponentToSideMenu(LayeredLayout.encloseIn(
                 sl,
                 FlowLayout.encloseCenterBottom(
-                        new Label(res.getImage("profile-pic.png"), "PictureWhiteBackgrond"))
+                        new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond"))
         ));
         
-        tb.addMaterialCommandToSideMenu("Accueil", FontImage.MATERIAL_UPDATE, e -> new NewsfeedForm(res).show());
-        tb.addMaterialCommandToSideMenu("Mon Profile", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
-        tb.addMaterialCommandToSideMenu("Mes Réclamations", FontImage.MATERIAL_ACCOUNT_BOX, e -> new AjoutReclamationForm(res).show());
-        tb.addMaterialCommandToSideMenu("Déconnexion", FontImage.MATERIAL_EXIT_TO_APP, e -> new WalkthruForm(res).show()); 
-
-
+        tb.addMaterialCommandToSideMenu("Newsfeed", FontImage.MATERIAL_UPDATE, e -> new NewsfeedForm(res).show());
+        tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
+        tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new WalkthruForm(res).show()); 
+        tb.addMaterialCommandToSideMenu("Gestion des produits ", FontImage.MATERIAL_EXIT_TO_APP, e -> new ProduitForm(this).show());
+        tb.addMaterialCommandToSideMenu("Liste des produits", FontImage.MATERIAL_EXIT_TO_APP, e -> new ListeProduit(res).show());
+        
         
     }
 }
