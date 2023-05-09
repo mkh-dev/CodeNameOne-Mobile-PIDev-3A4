@@ -58,7 +58,7 @@ tb.addSearchCommand(e -> {
         Tabs swipe = new Tabs();
         Label s1 = new Label();
         Label s2 = new Label();
-        addTab(swipe, s1, res.getImage("back-logoo.jpg"), "", "", res);
+        addTab(swipe, s1, res.getImage("back-logoo.png"), "", "", res);
 
         /////////////////////////////////////////////////
         swipe.setUIID("Container");
@@ -195,7 +195,7 @@ tb.addSearchCommand(e -> {
                 )
         );
 
-        swipe.addTab("", res.getImage("back-logo.jpeg"), page1);
+        swipe.addTab("", res.getImage("back-logo.png"), page1);
     }
         
             private void updateArrowPosition(Button btn, Label l) {
