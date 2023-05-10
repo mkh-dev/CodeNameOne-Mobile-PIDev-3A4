@@ -197,7 +197,7 @@ public class AjoutReclamationForm extends BaseForm {
                 } else {
 
                     // check for forbidden words in message
-                    String[] forbiddenWords = {"mot1", "mot2", "mot3"}; // add your list of forbidden words
+                   String[] forbiddenWords = {"Sang", "Boucherie", "Crucifixion", "Saignant", "Chair", "Ecchymoses", "Accident de voiture", "Cadavre", "Crucifié", "Coupe", "Décapitation", "Infesté", "Horrible", "Tuer", "Infecté", "Sadique", "Abattage", "Teratome", "Trypophobie", "Blessure", "Cronenberg", "Khorne", "Cannibale", "Cannibalisme", "Viscéral", "Entrailles", "Yeux rouges", "Sanglant", "Meurtre", "Chirurgie", "Vivisection", "Massacre", "Hémoglobine", "Suicide", "Fasciste", "Nazi", "Prophète Mahomet", "Esclave", "Nègre", "Cokaïne", "Drogue", "Héroïne", "Meth", "Crack", "Torture", "Perturbant", "Pets", "Caca", "Verrues", "Merde", "Pudding brun", "Trou de balle", "Vomi", "Voluptueux", "Séduisant", "Sex", "Sperme", "Chaud", "Sexy", "Censuré", "Silencieux", "Deepfake", "Inapproprié", "Pus", "Baiser", "Waifu", "Succube", "Chirurgie", "Religion", "Islam", "Idiot"};
                     boolean messageContainsForbiddenWords = false;
 
                     for (String word : forbiddenWords) {
