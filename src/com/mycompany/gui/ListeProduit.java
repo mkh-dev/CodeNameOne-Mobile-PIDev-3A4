@@ -67,7 +67,7 @@ public class ListeProduit extends BaseForm{
         Label s1 = new Label();
         Label s2 = new Label();
         
-        addTab(swipe,s1,res.getImage("back-logoo.png"),"","",res);
+        addTab(swipe,s1,res.getImage("event.jpg"),"","",res);
         //
           swipe.setUIID("Container");
         swipe.getContentPane().setUIID("Container");
@@ -171,7 +171,7 @@ Button Share=new Button("Share");
         
         for(Produit art:list){
            
-            String urlImage = "back-logoo.png";
+            String urlImage = "event.jpg";
             
             Image placeholder = Image.createImage(120,90);
             EncodedImage enc = EncodedImage.createFromImage(placeholder, false);
@@ -222,7 +222,7 @@ Button Share=new Button("Share");
                                     ))
         );
         
-        swipe.addTab("",res.getImage("back-logoo.png"),page1);
+        swipe.addTab("",res.getImage("event.jpg"),page1);
         
         
         

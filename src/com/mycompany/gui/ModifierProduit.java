@@ -41,14 +41,18 @@ public class ModifierProduit extends BaseForm{
      Form current;
 
     public ModifierProduit(Resources res, Produit rec) {
-       super("Newsfeed", BoxLayout.y());
+          super("Newsfeed",BoxLayout.y()); //herigate men Newsfeed w l formulaire vertical
+    
         Toolbar tb = new Toolbar(true);
-        current = this;
+        current = this ;
         setToolbar(tb);
-        getTitleArea().setUIID("container");
-        setTitle("Modifier Produit");
+        getTitleArea().setUIID("Container");
+        setTitle("Ajout Reclamation");
         getContentPane().setScrollVisible(false);
         
+        
+        super.addSideMenu(res);
+
         
 //////////////////////////////////////////////////////////////////
 
@@ -58,7 +62,7 @@ tb.addSearchCommand(e -> {
         Tabs swipe = new Tabs();
         Label s1 = new Label();
         Label s2 = new Label();
-        addTab(swipe, s1, res.getImage("back-logoo.png"), "", "", res);
+        addTab(swipe, s1, res.getImage("event.jpg"), "", "", res);
 
         /////////////////////////////////////////////////
         swipe.setUIID("Container");
@@ -195,7 +199,7 @@ tb.addSearchCommand(e -> {
                 )
         );
 
-        swipe.addTab("", res.getImage("back-logo.png"), page1);
+        swipe.addTab("", res.getImage("event.jpg"), page1);
     }
         
             private void updateArrowPosition(Button btn, Label l) {

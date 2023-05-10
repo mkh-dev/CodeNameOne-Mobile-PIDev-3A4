@@ -68,7 +68,7 @@ public class BaseForm extends Form {
 
     protected void addSideMenu(Resources res) {
         Toolbar tb = getToolbar();
-        Image img = res.getImage("profile-background.jpg");
+        Image img = res.getImage("event.jpg");
         if(img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
@@ -79,15 +79,19 @@ public class BaseForm extends Form {
         tb.addComponentToSideMenu(LayeredLayout.encloseIn(
                 sl,
                 FlowLayout.encloseCenterBottom(
-                        new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond"))
+                        new Label(res.getImage("logo-fb.png"), "PictureWhiteBackgrond"))
         ));
         
-        tb.addMaterialCommandToSideMenu("Newsfeed", FontImage.MATERIAL_UPDATE, e -> new NewsfeedForm(res).show());
-        tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
-        tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new WalkthruForm(res).show()); 
-        tb.addMaterialCommandToSideMenu("Gestion des produits ", FontImage.MATERIAL_EXIT_TO_APP, e -> new ProduitForm(this).show());
-        tb.addMaterialCommandToSideMenu("Liste des produits", FontImage.MATERIAL_EXIT_TO_APP, e -> new ListeProduit(res).show());
-        
-        
+        tb.addMaterialCommandToSideMenu("Accueil", FontImage.MATERIAL_UPDATE, e -> new NewsfeedForm(res).show());
+        tb.addMaterialCommandToSideMenu("Mon profil", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
+        tb.addMaterialCommandToSideMenu("Liste des produits", FontImage.MATERIAL_SHOPPING_CART, e -> new ListeProduit(res).show());
+        tb.addMaterialCommandToSideMenu("Gestion des produits ", FontImage.MATERIAL_SETTINGS_APPLICATIONS, e -> new ProduitForm(this).show());
+       
+         tb.addMaterialCommandToSideMenu("Liste des évenement", FontImage.MATERIAL_EVENT, e -> new ListeEvenement(res).show());
+         tb.addMaterialCommandToSideMenu("Gestion des évenements", FontImage.MATERIAL_ADD_BOX, e -> new EventForm(this).show());
+         tb.addMaterialCommandToSideMenu("Mes réservation", FontImage.MATERIAL_PEOPLE, e -> new ReservationHome(res).show());
+         tb.addMaterialCommandToSideMenu("Mes réclamations", FontImage.MATERIAL_ACCOUNT_BOX, e -> new AjoutReclamationForm(res).show());
+        tb.addMaterialCommandToSideMenu("Deconnexion", FontImage.MATERIAL_EXIT_TO_APP, e -> new WalkthruForm(res).show()); 
+
     }
 }

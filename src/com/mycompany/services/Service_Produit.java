@@ -53,14 +53,13 @@ public class Service_Produit {
 
             List<Map<String, Object>> list = (List<Map<String, Object>>) ReclamationListJson.get("root");
 
+            
+            
+            if (list != null && !list.isEmpty()) {
             for (Map<String, Object> obj : list) {
-                
-                
                 Produit coach = new Produit();
+                // votre code ici
                 
-                
-                
-
                float idProd = Float.parseFloat(obj.get("idProd").toString());
                coach.setIdProd((int) idProd);
                
@@ -91,21 +90,21 @@ public class Service_Produit {
                  
 
                float nbLikes = Float.parseFloat(obj.get("nbLikes").toString());
-               coach.setQuantite((int) nbLikes);
+               coach.setNbLikes((int) nbLikes);
                
                
                float nbDislikes = Float.parseFloat(obj.get("nbDislikes").toString());
                coach.setNbDislikes((int) nbDislikes);
                
 
-
                 Coachs.add(coach);
             }
-
-        } catch (IOException ex) {
-            System.out.println("Exception in parsing reclamations ");
         }
 
+    } catch (IOException ex) {
+        System.out.println("Exception in parsing reclamations ");
+    }
+        
         return Coachs;
     }
 

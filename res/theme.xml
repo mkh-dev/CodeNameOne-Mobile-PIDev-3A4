@@ -6,7 +6,10 @@
     <image name="back-logoo.png"  />
     <image name="confirmation-background.jpg"  />
     <image name="dog.jpg"  />
+    <image name="event.jpg"  />
+    <image name="evento.png"  />
     <image name="facebook-logo.png" type="multi"  />
+    <image name="logo-fb.png"  />
     <image name="Logo.png" type="multi"  />
     <image name="news-item-1.jpg"  />
     <image name="news-item-2.jpg"  />
@@ -20,6 +23,7 @@
     <image name="profile-background.jpg"  />
     <image name="profile-pic.jpg" type="multi"  />
     <image name="round.png"  />
+    <image name="sign.jpg"  />
     <image name="signin-background.jpg"  />
     <image name="signup-background.jpg"  />
     <image name="smily.png" type="multi"  />
