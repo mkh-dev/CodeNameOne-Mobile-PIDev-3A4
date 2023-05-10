@@ -55,7 +55,7 @@ public class AjoutReclamationForm extends BaseForm {
     
     Form current;
     public AjoutReclamationForm(Resources res ) {
-        super("Newsfeed",BoxLayout.y()); //herigate men Newsfeed w l formulaire vertical
+        super("Newsfeed",BoxLayout.y()); 
     
         Toolbar tb = new Toolbar(true);
         current = this ;
